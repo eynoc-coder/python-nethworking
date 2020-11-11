@@ -1,10 +1,12 @@
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 from urllib.parse import urljoin
 import re
 
 
 def download_page(url):
-    return urlopen(url).read().decode('utf-8')
+    USER_AGENT = 'Mozilla/5.0'
+    req = Request(url=url, headers={'User-Agent': USER_AGENT})
+    return urlopen(req).read().decode('utf-8')
 
 
 def extract_image_locations(page):
